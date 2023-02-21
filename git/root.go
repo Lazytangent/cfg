@@ -4,10 +4,12 @@ import (
 	"os/exec"
 	"log"
 	"fmt"
+	"strings"
 )
 
-func Run() {
-	out, err := exec.Command("git").Output()
+func Run(args ...string) {
+	gitArgs := strings.Join(args, " ")
+	out, err := exec.Command("git", gitArgs).Output()
 	if err != nil {
 		log.Println(err)
 	}

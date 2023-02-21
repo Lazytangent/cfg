@@ -9,5 +9,5 @@ import (
 
 func Run(cmd *cobra.Command, args []string) {
 	fmt.Println("Status command")
-	git.Run()
+	git.Run("status")
 }
