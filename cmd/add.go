@@ -3,6 +3,8 @@ package cmd
 import (
 	"github.com/spf13/cobra"
 	"fmt"
+
+	"github.com/lazytangent/cfgo/git"
 )
 
 func init() {
@@ -17,4 +19,12 @@ var addCmd = &cobra.Command{
 
 func add(cmd *cobra.Command, args []string) {
 	fmt.Println("Add command")
+
+	runArgs := []string {"add"}
+
+	if len(args) > 0 {
+		runArgs = append(runArgs, args...)
+	}
+
+	git.Run(runArgs...)
 }
