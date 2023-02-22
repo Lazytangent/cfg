@@ -2,7 +2,7 @@ package cmd
 
 import (
 	"github.com/spf13/cobra"
-	"fmt"
+	"github.com/lazytangent/cfgo/cmd/push"
 )
 
 func init() {
@@ -12,9 +12,5 @@ func init() {
 var pushCmd = &cobra.Command{
 	Use: "push",
 	Short: "Push any new commits to the remote repository",
-	Run: push,
-}
-
-func push(cmd *cobra.Command, args []string) {
-	fmt.Println("Push command")
+	Run: push.Run,
 }
