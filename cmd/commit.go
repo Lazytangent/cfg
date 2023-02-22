@@ -2,7 +2,7 @@ package cmd
 
 import (
 	"github.com/spf13/cobra"
-	"fmt"
+	"github.com/lazytangent/cfgo/cmd/commit"
 )
 
 func init() {
@@ -12,9 +12,5 @@ func init() {
 var commitCmd = &cobra.Command{
 	Use: "commit",
 	Short: "Commit files in the staging area",
-	Run: commit,
-}
-
-func commit(cmd *cobra.Command, args []string) {
-	fmt.Println("Commit command")
+	Run: commit.Run,
 }
