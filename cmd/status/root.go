@@ -10,5 +10,10 @@ import (
 
 func Run(cmd *cobra.Command, args []string) {
 	fmt.Println("Status command")
-	git.Run("status")
+	output, err := git.Run(false, false, "status")
+	if err != nil {
+		return
+	}
+
+	fmt.Println(output)
 }

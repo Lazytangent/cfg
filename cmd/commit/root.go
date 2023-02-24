@@ -15,5 +15,5 @@ func Run(cmd *cobra.Command, args []string) {
 		runArgs = append(runArgs, args...)
 	}
 
-	git.Run(runArgs...)
+	git.Run(true, true, runArgs...)
 }
