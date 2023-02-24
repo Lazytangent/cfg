@@ -1,15 +1,16 @@
 package cmd
 
 import (
-	"github.com/spf13/cobra"
 	"fmt"
 	"os"
+
+	"github.com/spf13/cobra"
 )
 
 var rootCmd = &cobra.Command{
-	Use: "cfg",
+	Use:   "cfg",
 	Short: "A convenience wrapper for handling dotfiles with a bare git repository.",
-	Run: run,
+	Run:   run,
 }
 
 func Execute() {

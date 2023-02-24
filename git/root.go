@@ -1,18 +1,16 @@
 package git
 
 import (
-	"os/exec"
 	"log"
-	"fmt"
-	"strings"
+	"os"
+	"os/exec"
 )
 
 func Run(args ...string) {
-	gitArgs := strings.Join(args, " ")
-	out, err := exec.Command("git", gitArgs).Output()
-	if err != nil {
+	cmd := exec.Command("git", args...)
+	cmd.Stdout = os.Stdout
+	cmd.Stdin = os.Stdin
+	if err := cmd.Run(); err != nil {
 		log.Println(err)
 	}
-
-	fmt.Print(string(out))
 }

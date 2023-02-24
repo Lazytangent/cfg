@@ -2,6 +2,7 @@ package status
 
 import (
 	"fmt"
+
 	"github.com/spf13/cobra"
 
 	"github.com/lazytangent/cfgo/git"
