@@ -8,6 +8,7 @@ import (
 	"path/filepath"
 
 	"github.com/spf13/cobra"
+	config_ "github.com/lazytangent/cfgo/config"
 )
 
 var Cmd = &cobra.Command{
@@ -39,7 +40,9 @@ func listConfig() {
 		log.Fatal(err)
 	}
 	configData := string(dat)
-	fmt.Println(configData)
+
+	cfg := config_.Parse(configData)
+	fmt.Printf("%v\n", cfg.Print())
 }
 
 func getConfigFile() string {

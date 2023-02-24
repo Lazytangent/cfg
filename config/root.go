@@ -1,6 +1,7 @@
 package config
 
 import (
+	"encoding/json"
 	"log"
 
 	"github.com/BurntSushi/toml"
@@ -18,4 +19,13 @@ func Parse(data string) Config {
 	}
 
 	return conf
+}
+
+func (c Config) Print() string {
+	data, err := json.MarshalIndent(c, "", "  ")
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	return string(data)
 }
