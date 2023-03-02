@@ -39,4 +39,4 @@ nothing to commit (use -u to show untracked files)
 
 There seems to be some variance in the output for this.
 
-No color for this verion.
+No color for this version.
