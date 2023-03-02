@@ -13,6 +13,9 @@ Changes not staged for commit:
 
 no changes added to commit (use "git add" and/or "git commit -a")
 #+end_src
+
+In the terminal, the =modified= file line is red.
+
 **** Staged files but not yet committed
 #+begin_src bash
 ❯ config status
@@ -24,6 +27,9 @@ Changes to be committed:
 
 Untracked files not listed (use -u option to show untracked files)
 #+end_src
+
+In the terminal, the =modified= and =new file= lines are green.
+
 **** Newly committed but not yet pushed
 #+begin_src bash
 ❯ config status
@@ -32,3 +38,5 @@ nothing to commit (use -u to show untracked files)
 #+end_src
 
 There seems to be some variance in the output for this.
+
+No color for this verion.
