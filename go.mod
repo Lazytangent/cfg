@@ -1,4 +1,4 @@
-module github.com/lazytangent/cfgo
+module github.com/lazytangent/cfg
 
 go 1.20
 

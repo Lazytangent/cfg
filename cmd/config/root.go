@@ -3,7 +3,7 @@ package config
 import (
 	"fmt"
 
-	config_ "github.com/lazytangent/cfgo/config"
+	config_ "github.com/lazytangent/cfg/config"
 	"github.com/spf13/cobra"
 )
 

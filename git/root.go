@@ -6,7 +6,7 @@ import (
 	"os"
 	"os/exec"
 
-	"github.com/lazytangent/cfgo/config"
+	"github.com/lazytangent/cfg/config"
 )
 
 func Run(connectStdin, connectStdout bool, args ...string) (string, error) {

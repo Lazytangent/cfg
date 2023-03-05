@@ -1,7 +1,7 @@
 package cmd
 
 import (
-	"github.com/lazytangent/cfgo/cmd/status"
+	"github.com/lazytangent/cfg/cmd/status"
 	"github.com/spf13/cobra"
 )
 

@@ -5,7 +5,7 @@ import (
 
 	"github.com/spf13/cobra"
 
-	"github.com/lazytangent/cfgo/git"
+	"github.com/lazytangent/cfg/git"
 )
 
 func init() {

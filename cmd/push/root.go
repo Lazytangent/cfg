@@ -3,7 +3,7 @@ package push
 import (
 	"fmt"
 
-	"github.com/lazytangent/cfgo/git"
+	"github.com/lazytangent/cfg/git"
 	"github.com/spf13/cobra"
 )
 

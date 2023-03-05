@@ -1,7 +1,7 @@
 package cmd
 
 import (
-	"github.com/lazytangent/cfgo/cmd/commit"
+	"github.com/lazytangent/cfg/cmd/commit"
 	"github.com/spf13/cobra"
 )
 

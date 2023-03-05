@@ -1,7 +1,7 @@
 package cmd
 
 import (
-	"github.com/lazytangent/cfgo/cmd/config"
+	"github.com/lazytangent/cfg/cmd/config"
 )
 
 func init() {
