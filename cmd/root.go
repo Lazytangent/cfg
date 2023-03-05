@@ -21,5 +21,8 @@ func Execute() {
 }
 
 func run(cmd *cobra.Command, args []string) {
-	fmt.Println("hello from cfg")
+	if len(args) == 0 {
+		cmd.Help()
+		os.Exit(0)
+	}
 }
