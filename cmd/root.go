@@ -2,15 +2,18 @@ package cmd
 
 import (
 	"fmt"
+	"log"
 	"os"
 
 	"github.com/spf13/cobra"
 )
 
 var rootCmd = &cobra.Command{
-	Use:   "cfg",
+	Use:   "cfg [COMMAND] -- [GIT_ARGS]",
 	Short: "A convenience wrapper for handling dotfiles with a bare git repository.",
 	Run:   run,
+	PersistentPreRun: preRun,
+	TraverseChildren: true,
 }
 
 func Execute() {
@@ -25,4 +28,22 @@ func run(cmd *cobra.Command, args []string) {
 		cmd.Help()
 		os.Exit(0)
 	}
+}
+
+func preRun(cmd *cobra.Command, args []string) {
+	debug, err := cmd.Flags().GetBool("debug")
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	if debug {
+		idx := cmd.ArgsLenAtDash()
+		fmt.Printf("Index: %d\n", idx)
+
+		fmt.Println(args[idx])
+	}
+}
+
+func init() {
+	rootCmd.PersistentFlags().BoolP("debug", "d", false, "Set to print extra lines for debugging")
 }
