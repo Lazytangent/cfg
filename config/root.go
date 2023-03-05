@@ -3,6 +3,9 @@ package config
 import (
 	"encoding/json"
 	"log"
+	"os"
+	"os/user"
+	"path/filepath"
 
 	"github.com/BurntSushi/toml"
 )
@@ -28,4 +31,24 @@ func (c Config) Print() string {
 	}
 
 	return string(data)
+}
+
+const configFile = "~/.config/cfgo/config.toml"
+
+// TODO: Refactor to use strings.Replacer to explicitly replace the starting
+// '~/'
+func ParseTildeInPath(path string) string {
+	usr, _ := user.Current()
+	dir := usr.HomeDir
+
+	return filepath.Join(dir, path[2:])
+}
+
+func ListConfig() string {
+	configPath := ParseTildeInPath(configFile)
+	dat, err := os.ReadFile(configPath)
+	if err != nil {
+		log.Fatal(err)
+	}
+	return string(dat)
 }
