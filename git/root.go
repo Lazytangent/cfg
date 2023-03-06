@@ -28,7 +28,7 @@ func Run(connectStdin, connectStdout bool, args ...string) (string, error) {
 }
 
 func addDefaultArgs(args []string) []string {
-	cfg := config.Parse(config.ListConfig())
+	cfg := config.Parse(config.ReadConfigFile())
 	gitDir := config.ParseTildeInPath(cfg.GitDir)
 	workTree := config.ParseTildeInPath(cfg.WorkTree)
 

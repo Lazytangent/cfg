@@ -45,7 +45,7 @@ func ParseTildeInPath(path string) string {
 	return filepath.Join(dir, path[2:])
 }
 
-func ListConfig() string {
+func ReadConfigFile() string {
 	configPath := ParseTildeInPath(configFile)
 	dat, err := os.ReadFile(configPath)
 	if err != nil {

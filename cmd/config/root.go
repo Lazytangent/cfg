@@ -23,7 +23,7 @@ func init() {
 
 func Run(cmd *cobra.Command, args []string) {
 	if list {
-		data := config_.ListConfig()
+		data := config_.ReadConfigFile()
 		cfg := config_.Parse(data)
 		fmt.Printf("%v\n", cfg.Print())
 	}
