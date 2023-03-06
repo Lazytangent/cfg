@@ -14,6 +14,7 @@ func init() {
 
 var addCmd = &cobra.Command{
 	Use:   "add",
+	Aliases: []string{"a"},
 	Short: "Add files to the staging area",
 	Run:   add,
 }

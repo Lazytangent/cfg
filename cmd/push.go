@@ -11,6 +11,7 @@ func init() {
 
 var pushCmd = &cobra.Command{
 	Use:   "push",
+	Aliases: []string{"p", "pu"},
 	Short: "Push any new commits to the remote repository",
 	Run:   push.Run,
 }

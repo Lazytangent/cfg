@@ -9,6 +9,7 @@ import (
 
 var Cmd = &cobra.Command{
 	Use:   "config",
+	Aliases: []string{"cfg", "f"},
 	Short: "Configuration stuff",
 	Run:   Run,
 }
