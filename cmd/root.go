@@ -40,7 +40,10 @@ func preRun(cmd *cobra.Command, args []string) {
 		idx := cmd.ArgsLenAtDash()
 		fmt.Printf("Index: %d\n", idx)
 
-		fmt.Println(args[idx])
+		fmt.Println(args)
+		if idx >= 0 {
+			fmt.Println(args[idx:])
+		}
 	}
 }
 
