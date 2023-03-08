@@ -2,6 +2,7 @@ package config
 
 import (
 	"fmt"
+	"os"
 
 	config_ "github.com/lazytangent/cfg/config"
 	"github.com/spf13/cobra"
@@ -27,5 +28,10 @@ func Run(cmd *cobra.Command, args []string) {
 		data := config_.ReadConfigFile()
 		cfg := config_.Parse(data)
 		fmt.Printf("%v\n", cfg.Print())
+	}
+
+	if len(args) == 0 {
+		cmd.Help()
+		os.Exit(0)
 	}
 }
