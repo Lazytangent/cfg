@@ -20,3 +20,4 @@ tags:
 .PHONY: fmt
 fmt:
 	@go fmt ./...
+	@goimports -w .
