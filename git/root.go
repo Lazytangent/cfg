@@ -18,13 +18,16 @@ func Run(connectStdin, connectStdout bool, args ...string) (string, error) {
 	}
 	if connectStdout {
 		cmd.Stdout = os.Stdout
-	}
-	data, err := cmd.Output()
-	if err != nil {
-		log.Println(err)
-	}
+		cmd.Run()
+		return "", nil
+	} else {
+		data, err := cmd.Output()
+		if err != nil {
+			log.Println(err)
+		}
 
-	return string(data), err
+		return string(data), err
+	}
 }
 
 func addDefaultArgs(args []string) []string {

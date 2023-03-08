@@ -2,6 +2,7 @@ package cmd
 
 import (
 	"fmt"
+	"log"
 
 	"github.com/spf13/cobra"
 
@@ -20,9 +21,16 @@ var addCmd = &cobra.Command{
 }
 
 func add(cmd *cobra.Command, args []string) {
-	fmt.Println("Add command")
+	debug, err := cmd.Flags().GetBool("debug")
+	if err != nil {
+		log.Fatal(err)
+	}
 
-	runArgs := []string{"add"}
+	if debug {
+		fmt.Println("Add command")
+	}
+
+	runArgs := []string{"add", "-f"}
 
 	if len(args) > 0 {
 		runArgs = append(runArgs, args...)

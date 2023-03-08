@@ -14,6 +14,7 @@ import (
 )
 
 const notStaged = `Changes not staged for commit:`
+const staged = `Changes to be committed:`
 
 func Run(cmd *cobra.Command, args []string) {
 	debug, err := cmd.Flags().GetBool("debug")
@@ -29,27 +30,60 @@ func Run(cmd *cobra.Command, args []string) {
 		return
 	}
 
-	outputSplit := strings.Split(output, notStaged)
-	notStagedSection := outputSplit[1]
-	modifiedRe := regexp.MustCompile(`^\s+modified:\s+`)
+	handleNotModified(output)
+	handleStaged(output)
+}
 
-	modifiedSection := []string{}
+func handleStaged(output string) {
+	outputSplit := strings.Split(output, staged)
 
-	for _, line := range strings.Split(notStagedSection, "\n") {
-		if modifiedRe.MatchString(line) {
-			split := modifiedRe.Split(line, -1)
-			modifiedSection = append(modifiedSection, split[1])
+	if len(outputSplit) > 1 {
+		notStagedSection := outputSplit[1]
+		modifiedRe := regexp.MustCompile(`^\s+modified:\s+`)
+
+		modifiedSection := []string{}
+
+		for _, line := range strings.Split(notStagedSection, "\n") {
+			if modifiedRe.MatchString(line) {
+				split := modifiedRe.Split(line, -1)
+				modifiedSection = append(modifiedSection, split[1])
+			}
+		}
+
+		c := color.New(color.FgHiWhite).Add(color.Bold)
+		c.Println("Staged:")
+		for _, path := range modifiedSection {
+			newPath := substituteTilde(path)
+			newLine := fmt.Sprintf("\t%s", newPath)
+			color.Green(newLine)
 		}
 	}
+}
 
-	c := color.New(color.FgHiWhite).Add(color.Bold)
-	c.Println("Modified Files:")
-	for _, path := range modifiedSection {
-		newPath := substituteTilde(path)
-		newLine := fmt.Sprintf("\t%s", newPath)
-		color.Red(newLine)
+func handleNotModified(output string) {
+	outputSplit := strings.Split(output, notStaged)
+
+	if len(outputSplit) > 1 {
+		notStagedSection := outputSplit[1]
+		modifiedRe := regexp.MustCompile(`^\s+modified:\s+`)
+
+		modifiedSection := []string{}
+
+		for _, line := range strings.Split(notStagedSection, "\n") {
+			if modifiedRe.MatchString(line) {
+				split := modifiedRe.Split(line, -1)
+				modifiedSection = append(modifiedSection, split[1])
+			}
+		}
+
+		c := color.New(color.FgHiWhite).Add(color.Bold)
+		c.Println("Modified Files:")
+		for _, path := range modifiedSection {
+			newPath := substituteTilde(path)
+			newLine := fmt.Sprintf("\t%s", newPath)
+			color.Red(newLine)
+		}
 	}
-
 }
 
 func substituteTilde(path string) string {
