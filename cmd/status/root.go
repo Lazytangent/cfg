@@ -14,8 +14,8 @@ import (
 	"github.com/lazytangent/cfg/utils"
 )
 
-const notStaged = `Changes not staged for commit:`
-const staged = `Changes to be committed:`
+const notStagedMsg = `Changes not staged for commit:`
+const stagedMsg = `Changes to be committed:`
 
 func Run(cmd *cobra.Command, args []string) {
 	debug, err := cmd.Flags().GetBool("debug")
@@ -37,12 +37,17 @@ func Run(cmd *cobra.Command, args []string) {
 		return
 	}
 
-	handleNotModified(output)
-	handleStaged(output)
+	notModifiedStatus := notModified(output)
+	stagedStatus := staged(output)
+
+	if !notModifiedStatus && !stagedStatus {
+		c := color.New(color.FgHiWhite).Add(color.Bold)
+		c.Println("No files changed")
+	}
 }
 
-func handleStaged(output string) {
-	outputSplit := strings.Split(output, staged)
+func staged(output string) bool {
+	outputSplit := strings.Split(output, stagedMsg)
 
 	if len(outputSplit) > 1 {
 		notStagedSection := outputSplit[1]
@@ -64,11 +69,15 @@ func handleStaged(output string) {
 			newLine := fmt.Sprintf("\t%s", newPath)
 			color.Green(newLine)
 		}
+
+		return true
 	}
+
+	return false
 }
 
-func handleNotModified(output string) {
-	outputSplit := strings.Split(output, notStaged)
+func notModified(output string) bool {
+	outputSplit := strings.Split(output, notStagedMsg)
 
 	if len(outputSplit) > 1 {
 		notStagedSection := outputSplit[1]
@@ -90,7 +99,11 @@ func handleNotModified(output string) {
 			newLine := fmt.Sprintf("\t%s", newPath)
 			color.Red(newLine)
 		}
+
+		return true
 	}
+
+	return false
 }
 
 func substituteTilde(path string) string {
