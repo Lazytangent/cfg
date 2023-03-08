@@ -6,6 +6,8 @@ import (
 	"os"
 
 	"github.com/spf13/cobra"
+
+	"github.com/lazytangent/cfg/utils"
 )
 
 var rootCmd = &cobra.Command{
@@ -37,8 +39,10 @@ func preRun(cmd *cobra.Command, args []string) {
 	}
 
 	if debug {
+		delim := utils.CreateDelimiter("Root Cmd")
+		fmt.Println(delim)
 		idx := cmd.ArgsLenAtDash()
-		fmt.Printf("Index: %d\n", idx)
+		fmt.Printf("Index of Git Args: %d\n", idx)
 
 		fmt.Println(args)
 		if idx >= 0 {

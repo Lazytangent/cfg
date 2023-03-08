@@ -11,6 +11,7 @@ import (
 	"github.com/fatih/color"
 
 	"github.com/lazytangent/cfg/git"
+	"github.com/lazytangent/cfg/utils"
 )
 
 const notStaged = `Changes not staged for commit:`
@@ -22,10 +23,16 @@ func Run(cmd *cobra.Command, args []string) {
 		log.Fatal(err)
 	}
 	if debug {
-		fmt.Println("Status command")
+		fmt.Println(utils.CreateDelimiter("Status Command"))
 	}
 
 	output, err := git.Run(false, false, "status")
+	if debug {
+		fmt.Println("Normal output:")
+		fmt.Print(output)
+		fmt.Println(utils.CreateDelimiter(""))
+	}
+
 	if err != nil {
 		return
 	}
