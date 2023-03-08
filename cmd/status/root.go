@@ -3,6 +3,7 @@ package status
 import (
 	"fmt"
 	"log"
+	"os"
 	"regexp"
 	"strings"
 
@@ -43,8 +44,34 @@ func Run(cmd *cobra.Command, args []string) {
 
 	c := color.New(color.FgHiWhite).Add(color.Bold)
 	c.Println("Modified Files:")
-	for _, line := range modifiedSection {
-		newLine := fmt.Sprintf("\t%s", line)
+	for _, path := range modifiedSection {
+		newPath := substituteTilde(path)
+		newLine := fmt.Sprintf("\t%s", newPath)
 		color.Red(newLine)
 	}
+
+}
+
+func substituteTilde(path string) string {
+	cwd, err := os.Getwd()
+	if err != nil {
+		log.Fatal(err)
+	}
+	homeDir, err := os.UserHomeDir()
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	cwdTrimmed := strings.Split(cwd, homeDir)
+	cwdSplitDirsCount := strings.Count(cwdTrimmed[1], "/")
+
+	newPath := path
+
+	for i := 0; i < cwdSplitDirsCount; i++ {
+		newPath = strings.TrimPrefix(newPath, "../")
+	}
+
+	newPath = fmt.Sprintf("~/%s", newPath)
+
+	return newPath
 }
