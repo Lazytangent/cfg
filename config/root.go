@@ -4,7 +4,7 @@ import (
 	"encoding/json"
 	"log"
 	"os"
-	"path/filepath"
+	"strings"
 
 	"github.com/BurntSushi/toml"
 )
@@ -42,7 +42,7 @@ func ParseTildeInPath(path string) string {
 		log.Fatal(err)
 	}
 
-	return filepath.Join(dir, path[2:])
+	return strings.Replace(path, "~", dir, -1)
 }
 
 func ReadConfigFile() string {
