@@ -16,3 +16,7 @@ check:
 .PHONY: tags
 tags:
 	@ctags -R .
+
+.PHONY: fmt
+fmt:
+	@go fmt .
