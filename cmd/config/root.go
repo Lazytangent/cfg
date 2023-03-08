@@ -10,7 +10,7 @@ import (
 var Cmd = &cobra.Command{
 	Use:   "config",
 	Aliases: []string{"cfg", "f"},
-	Short: "Configuration stuff",
+	Short: "An alias for `git config` specific to the dotfiles local repository",
 	Run:   Run,
 }
 
