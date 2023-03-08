@@ -19,4 +19,4 @@ tags:
 
 .PHONY: fmt
 fmt:
-	@go fmt .
+	@go fmt ./...
