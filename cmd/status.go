@@ -10,8 +10,8 @@ func init() {
 }
 
 var statusCmd = &cobra.Command{
-	Use:   "status",
+	Use:     "status",
 	Aliases: []string{"s", "st"},
-	Short: "Print the current git status of the dotfiles repo",
-	Run:   status.Run,
+	Short:   "Print the current git status of the dotfiles repo",
+	Run:     status.Run,
 }

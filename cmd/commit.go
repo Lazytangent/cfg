@@ -10,8 +10,8 @@ func init() {
 }
 
 var commitCmd = &cobra.Command{
-	Use:   "commit",
+	Use:     "commit",
 	Aliases: []string{"c"},
-	Short: "Commit files in the staging area",
-	Run:   commit.Run,
+	Short:   "Commit files in the staging area",
+	Run:     commit.Run,
 }

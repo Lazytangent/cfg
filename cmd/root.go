@@ -11,9 +11,9 @@ import (
 )
 
 var rootCmd = &cobra.Command{
-	Use:   "cfg [COMMAND] -- [GIT_ARGS]",
-	Short: "A convenience wrapper for handling dotfiles with a bare git repository.",
-	Run:   run,
+	Use:              "cfg [COMMAND] -- [GIT_ARGS]",
+	Short:            "A convenience wrapper for handling dotfiles with a bare git repository.",
+	Run:              run,
 	PersistentPreRun: preRun,
 	TraverseChildren: true,
 }

@@ -14,10 +14,10 @@ func init() {
 }
 
 var addCmd = &cobra.Command{
-	Use:   "add",
+	Use:     "add",
 	Aliases: []string{"a"},
-	Short: "Add files to the staging area",
-	Run:   add,
+	Short:   "Add files to the staging area",
+	Run:     add,
 }
 
 func add(cmd *cobra.Command, args []string) {

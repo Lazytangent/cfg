@@ -1,15 +1,15 @@
 package cmd
 
 import (
-	"github.com/spf13/cobra"
 	"github.com/lazytangent/cfg/cmd/restore"
+	"github.com/spf13/cobra"
 )
 
 var restoreCmd = &cobra.Command{
-	Use: "restore",
+	Use:     "restore",
 	Aliases: []string{"res"},
-	Short: "Restores files to previous state",
-	Run: restore.Run,
+	Short:   "Restores files to previous state",
+	Run:     restore.Run,
 }
 
 func init() {

@@ -16,7 +16,7 @@ func CreateDelimiter(msg string) string {
 	remaining := defaultLen - n
 	halfLen := remaining / 2
 	lenOfDash := halfLen - 1
-	padding := halfLen * 2 < remaining
+	padding := halfLen*2 < remaining
 
 	left := strings.Repeat("-", lenOfDash)
 	mid := fmt.Sprintf(" %s ", msg)
