@@ -2,6 +2,7 @@ package config
 
 import (
 	"encoding/json"
+	"errors"
 	"log"
 	"os"
 	"strings"
@@ -32,10 +33,8 @@ func (c Config) Print() string {
 	return string(data)
 }
 
-const configFile = "~/.config/cfgo/config.toml"
+const configFile = "~/.config/cfg/config.toml"
 
-// TODO: Refactor to use strings.Replacer to explicitly replace the starting
-// '~/'
 func ParseTildeInPath(path string) string {
 	dir, err := os.UserHomeDir()
 	if err != nil {
@@ -45,10 +44,18 @@ func ParseTildeInPath(path string) string {
 	return strings.Replace(path, "~", dir, -1)
 }
 
+const defaultConfigFile = `
+git_dir = "~/.cfg/"
+work_tree = "~/"
+`
+
 func ReadConfigFile() string {
 	configPath := ParseTildeInPath(configFile)
 	dat, err := os.ReadFile(configPath)
 	if err != nil {
+		if errors.Is(err, os.ErrNotExist) {
+			return defaultConfigFile
+		}
 		log.Fatal(err)
 	}
 	return string(dat)
