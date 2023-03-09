@@ -49,22 +49,45 @@ func staged(output string) bool {
 	if len(outputSplit) > 1 {
 		notStagedSection := outputSplit[1]
 		modifiedRe := regexp.MustCompile(`^\s+modified:\s+`)
+		newFileRe := regexp.MustCompile(`^\s+new file:\s+`)
 
 		modifiedSection := []string{}
+		newFileSection := []string{}
 
 		for _, line := range strings.Split(notStagedSection, "\n") {
 			if modifiedRe.MatchString(line) {
 				split := modifiedRe.Split(line, -1)
 				modifiedSection = append(modifiedSection, split[1])
 			}
+
+			if newFileRe.MatchString(line) {
+				split := newFileRe.Split(line, -1)
+				newFileSection = append(newFileSection, split[1])
+			}
 		}
 
 		c := color.New(color.FgHiWhite).Add(color.Bold)
-		c.Println("Staged:")
-		for _, path := range modifiedSection {
-			newPath := substituteTilde(path)
-			newLine := fmt.Sprintf("\t%s", newPath)
-			color.Green(newLine)
+		c.Println("Staged:\n")
+
+		if len(modifiedSection) > 0 {
+			c.Println("Modified:")
+			for _, path := range modifiedSection {
+				newPath := substituteTilde(path)
+				newLine := fmt.Sprintf("\t%s", newPath)
+				color.Green(newLine)
+			}
+
+			c.Println("")
+		}
+
+		if len(newFileSection) > 0 {
+			c.Println("New File(s):")
+
+			for _, path := range newFileSection {
+				newPath := substituteTilde(path)
+				newLine := fmt.Sprintf("\t%s", newPath)
+				color.Green(newLine)
+			}
 		}
 
 		return true
