@@ -28,6 +28,7 @@ func Run(cmd *cobra.Command, args []string) {
 		data := config_.ReadConfigFile()
 		cfg := config_.Parse(data)
 		fmt.Printf("%v\n", cfg.Print())
+		return
 	}
 
 	if len(args) == 0 {
