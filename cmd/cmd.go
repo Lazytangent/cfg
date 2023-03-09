@@ -6,6 +6,7 @@ import (
 
 	"github.com/spf13/cobra"
 
+	"github.com/lazytangent/cfg/git"
 	"github.com/lazytangent/cfg/utils"
 )
 
@@ -30,6 +31,9 @@ func run(cmd *cobra.Command, args []string) {
 		cmd.Help()
 		os.Exit(0)
 	}
+
+	gitArgs := utils.GetGitArgs(cmd, args)
+	git.Run(true, true, gitArgs...)
 }
 
 func preRun(cmd *cobra.Command, args []string) {

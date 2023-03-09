@@ -4,6 +4,8 @@ import (
 	"fmt"
 	"log"
 	"strings"
+
+	"github.com/spf13/cobra"
 )
 
 const defaultLen = 80
@@ -39,4 +41,14 @@ func LogPrintlnIfErr(err error) {
 	if err != nil {
 		log.Println(err)
 	}
+}
+
+func GetGitArgs(cmd *cobra.Command, args []string) []string {
+	idx := cmd.ArgsLenAtDash()
+
+	if idx == 0 {
+		return []string{}
+	}
+
+	return args[idx:]
 }
