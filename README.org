@@ -1,4 +1,4 @@
-#+title: =cfgo=
+#+title: =cfg=
 
 ** Git code snippets
 *** =status=
