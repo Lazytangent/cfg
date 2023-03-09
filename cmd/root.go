@@ -2,7 +2,6 @@ package cmd
 
 import (
 	"fmt"
-	"log"
 	"os"
 
 	"github.com/spf13/cobra"
@@ -34,9 +33,7 @@ func run(cmd *cobra.Command, args []string) {
 
 func preRun(cmd *cobra.Command, args []string) {
 	debug, err := cmd.Flags().GetBool("debug")
-	if err != nil {
-		log.Fatal(err)
-	}
+	utils.LogFatalIfErr(err)
 
 	if debug {
 		delim := utils.CreateDelimiter("Root Cmd")

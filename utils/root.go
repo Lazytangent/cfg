@@ -2,6 +2,7 @@ package utils
 
 import (
 	"fmt"
+	"log"
 	"strings"
 )
 
@@ -26,4 +27,16 @@ func CreateDelimiter(msg string) string {
 	}
 
 	return fmt.Sprintf("%s%s%s", left, mid, right)
+}
+
+func LogFatalIfErr(err error) {
+	if err != nil {
+		log.Fatal(err)
+	}
+}
+
+func LogPrintlnIfErr(err error) {
+	if err != nil {
+		log.Println(err)
+	}
 }

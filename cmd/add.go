@@ -2,11 +2,11 @@ package cmd
 
 import (
 	"fmt"
-	"log"
 
 	"github.com/spf13/cobra"
 
 	"github.com/lazytangent/cfg/git"
+	"github.com/lazytangent/cfg/utils"
 )
 
 func init() {
@@ -22,9 +22,7 @@ var addCmd = &cobra.Command{
 
 func add(cmd *cobra.Command, args []string) {
 	debug, err := cmd.Flags().GetBool("debug")
-	if err != nil {
-		log.Fatal(err)
-	}
+	utils.LogFatalIfErr(err)
 
 	if debug {
 		fmt.Println("Add command")

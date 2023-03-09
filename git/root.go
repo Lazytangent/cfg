@@ -2,11 +2,11 @@ package git
 
 import (
 	"fmt"
-	"log"
 	"os"
 	"os/exec"
 
 	"github.com/lazytangent/cfg/config"
+	"github.com/lazytangent/cfg/utils"
 )
 
 func Run(connectStdin, connectStdout bool, args ...string) (string, error) {
@@ -22,9 +22,7 @@ func Run(connectStdin, connectStdout bool, args ...string) (string, error) {
 		return "", nil
 	} else {
 		data, err := cmd.Output()
-		if err != nil {
-			log.Println(err)
-		}
+		utils.LogPrintlnIfErr(err)
 
 		return string(data), err
 	}

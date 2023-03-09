@@ -2,7 +2,6 @@ package status
 
 import (
 	"fmt"
-	"log"
 	"os"
 	"regexp"
 	"strings"
@@ -19,9 +18,7 @@ const stagedMsg = `Changes to be committed:`
 
 func Run(cmd *cobra.Command, args []string) {
 	debug, err := cmd.Flags().GetBool("debug")
-	if err != nil {
-		log.Fatal(err)
-	}
+	utils.LogFatalIfErr(err)
 	if debug {
 		fmt.Println(utils.CreateDelimiter("Status Command"))
 	}
@@ -108,13 +105,10 @@ func notModified(output string) bool {
 
 func substituteTilde(path string) string {
 	cwd, err := os.Getwd()
-	if err != nil {
-		log.Fatal(err)
-	}
+	utils.LogFatalIfErr(err)
+
 	homeDir, err := os.UserHomeDir()
-	if err != nil {
-		log.Fatal(err)
-	}
+	utils.LogFatalIfErr(err)
 
 	cwdTrimmed := strings.Split(cwd, homeDir)
 	cwdSplitDirsCount := strings.Count(cwdTrimmed[1], "/")

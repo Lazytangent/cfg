@@ -2,7 +2,6 @@ package restore
 
 import (
 	"fmt"
-	"log"
 
 	"github.com/spf13/cobra"
 
@@ -12,9 +11,7 @@ import (
 
 func Run(cmd *cobra.Command, args []string) {
 	debug, err := cmd.Flags().GetBool("debug")
-	if err != nil {
-		log.Fatal(err)
-	}
+	utils.LogFatalIfErr(err)
 
 	if debug {
 		fmt.Println(utils.CreateDelimiter("Restore Command"))
