@@ -4,8 +4,10 @@ import (
 	"fmt"
 	"os"
 
-	config_ "github.com/lazytangent/cfg/config"
 	"github.com/spf13/cobra"
+
+	config_ "github.com/lazytangent/cfg/config"
+	"github.com/lazytangent/cfg/utils"
 )
 
 var Cmd = &cobra.Command{
@@ -24,6 +26,14 @@ func init() {
 }
 
 func Run(cmd *cobra.Command, args []string) {
+	debug, err := cmd.Flags().GetBool("debug")
+	utils.LogPrintlnIfErr(err)
+
+	if debug {
+		fmt.Println(utils.CreateDelimiter("Config Command"))
+		return
+	}
+
 	if list {
 		data := config_.ReadConfigFile()
 		cfg := config_.Parse(data)
