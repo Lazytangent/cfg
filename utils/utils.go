@@ -46,7 +46,7 @@ func LogPrintlnIfErr(err error) {
 func GetGitArgs(cmd *cobra.Command, args []string) []string {
 	idx := cmd.ArgsLenAtDash()
 
-	if idx == 0 {
+	if idx == -1 {
 		return []string{}
 	}
 

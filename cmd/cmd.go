@@ -27,13 +27,19 @@ func Execute() {
 }
 
 func run(cmd *cobra.Command, args []string) {
+	debug, err := cmd.Flags().GetBool("debug")
+	utils.LogFatalIfErr(err)
+
 	if len(args) == 0 {
+		if debug {
+			fmt.Printf("Args: %v\n", args)
+		}
 		cmd.Help()
 		os.Exit(0)
 	}
 
 	gitArgs := utils.GetGitArgs(cmd, args)
-	git.Run(true, true, gitArgs...)
+	git.Run(debug, true, true, gitArgs...)
 }
 
 func preRun(cmd *cobra.Command, args []string) {
@@ -46,7 +52,6 @@ func preRun(cmd *cobra.Command, args []string) {
 		idx := cmd.ArgsLenAtDash()
 		fmt.Printf("Index of Git Args: %d\n", idx)
 
-		fmt.Println(args)
 		if idx >= 0 {
 			fmt.Println(args[idx:])
 		}

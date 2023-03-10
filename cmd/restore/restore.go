@@ -23,7 +23,7 @@ func Run(cmd *cobra.Command, args []string) {
 		runArgs = append(runArgs, args...)
 	}
 
-	output, err := git.Run(false, false, runArgs...)
+	output, err := git.Run(debug, false, false, runArgs...)
 	if err != nil {
 		fmt.Println(err)
 	}

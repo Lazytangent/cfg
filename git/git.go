@@ -9,8 +9,13 @@ import (
 	"github.com/lazytangent/cfg/utils"
 )
 
-func Run(connectStdin, connectStdout bool, args ...string) (string, error) {
+func Run(debug, connectStdin, connectStdout bool, args ...string) (string, error) {
 	args = addDefaultArgs(args)
+
+	if debug {
+		fmt.Println("Total args passed to git:")
+		fmt.Println(args)
+	}
 
 	cmd := exec.Command("git", args...)
 	if connectStdin {

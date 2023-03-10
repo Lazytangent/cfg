@@ -34,5 +34,5 @@ func add(cmd *cobra.Command, args []string) {
 		runArgs = append(runArgs, args...)
 	}
 
-	git.Run(true, true, runArgs...)
+	git.Run(debug, true, true, runArgs...)
 }

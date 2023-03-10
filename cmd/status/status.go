@@ -23,7 +23,7 @@ func Run(cmd *cobra.Command, args []string) {
 		fmt.Println(utils.CreateDelimiter("Status Command"))
 	}
 
-	output, err := git.Run(false, false, "status")
+	output, err := git.Run(debug, false, false, "status")
 	if debug {
 		fmt.Println("Normal output:")
 		fmt.Print(output)
