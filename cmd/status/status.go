@@ -34,8 +34,8 @@ func Run(cmd *cobra.Command, args []string) {
 		return
 	}
 
-	notModifiedStatus := notModified(output)
 	stagedStatus := staged(output)
+	notModifiedStatus := notModified(output)
 
 	if !notModifiedStatus && !stagedStatus {
 		c := color.New(color.FgHiWhite).Add(color.Bold)
@@ -44,7 +44,8 @@ func Run(cmd *cobra.Command, args []string) {
 }
 
 func staged(output string) bool {
-	outputSplit := strings.Split(output, stagedMsg)
+	notStagedSplit := strings.Split(output, notStagedMsg)
+	outputSplit := strings.Split(notStagedSplit[0], stagedMsg)
 
 	if len(outputSplit) > 1 {
 		notStagedSection := outputSplit[1]
@@ -67,10 +68,10 @@ func staged(output string) bool {
 		}
 
 		c := color.New(color.FgHiWhite).Add(color.Bold)
-		c.Println("Staged:\n")
+		c.Println("Staged:")
 
 		if len(modifiedSection) > 0 {
-			c.Println("Modified:")
+			c.Println("    Modified:")
 			for _, path := range modifiedSection {
 				newPath := substituteTilde(path)
 				newLine := fmt.Sprintf("\t%s", newPath)
@@ -81,7 +82,7 @@ func staged(output string) bool {
 		}
 
 		if len(newFileSection) > 0 {
-			c.Println("New File(s):")
+			c.Println("    New File(s):")
 
 			for _, path := range newFileSection {
 				newPath := substituteTilde(path)
@@ -113,7 +114,7 @@ func notModified(output string) bool {
 		}
 
 		c := color.New(color.FgHiWhite).Add(color.Bold)
-		c.Println("Modified Files:")
+		c.Println("Unstaged:")
 		for _, path := range modifiedSection {
 			newPath := substituteTilde(path)
 			newLine := fmt.Sprintf("\t%s", newPath)
