@@ -73,7 +73,13 @@ func staged(output string) bool {
 		if len(modifiedSection) > 0 {
 			c.Println("    Modified:")
 			for _, path := range modifiedSection {
-				newPath := substituteTilde(path)
+				var newPath string
+				if strings.HasPrefix(path, "../../") {
+					newPath = substituteTilde(path)
+				} else {
+					newPath = path
+				}
+
 				newLine := fmt.Sprintf("\t%s", newPath)
 				color.Green(newLine)
 			}
@@ -87,7 +93,13 @@ func staged(output string) bool {
 			c.Println("    New File(s):")
 
 			for _, path := range newFileSection {
-				newPath := substituteTilde(path)
+				var newPath string
+				if strings.HasPrefix(path, "../../") {
+					newPath = substituteTilde(path)
+				} else {
+					newPath = path
+				}
+
 				newLine := fmt.Sprintf("\t%s", newPath)
 				color.Green(newLine)
 			}
@@ -118,7 +130,13 @@ func notModified(output string) bool {
 		c := color.New(color.FgHiWhite).Add(color.Bold)
 		c.Println("Unstaged:")
 		for _, path := range modifiedSection {
-			newPath := substituteTilde(path)
+			var newPath string
+			if strings.HasPrefix(path, "../../") {
+				newPath = substituteTilde(path)
+			} else {
+				newPath = path
+			}
+
 			newLine := fmt.Sprintf("\t%s", newPath)
 			color.Red(newLine)
 		}
