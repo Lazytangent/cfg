@@ -77,11 +77,13 @@ func staged(output string) bool {
 				newLine := fmt.Sprintf("\t%s", newPath)
 				color.Green(newLine)
 			}
-
-			c.Println("")
 		}
 
 		if len(newFileSection) > 0 {
+			if len(modifiedSection) > 0 {
+				fmt.Println()
+			}
+
 			c.Println("    New File(s):")
 
 			for _, path := range newFileSection {
