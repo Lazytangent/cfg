@@ -13,6 +13,9 @@ func Run(cmd *cobra.Command, args []string) {
 	debug, err := cmd.Flags().GetBool("debug")
 	utils.LogFatalIfErr(err)
 
+	msg, err := cmd.Flags().GetString("message")
+	utils.LogFatalIfErr(err)
+
 	if debug {
 		fmt.Println("Commit command")
 	}
@@ -20,6 +23,10 @@ func Run(cmd *cobra.Command, args []string) {
 
 	if len(args) > 0 {
 		runArgs = append(runArgs, args...)
+	}
+
+	if msg != "" {
+		runArgs = append(runArgs, "-m", msg)
 	}
 
 	git.Run(debug, true, true, runArgs...)

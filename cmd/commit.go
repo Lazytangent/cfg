@@ -6,6 +6,8 @@ import (
 )
 
 func init() {
+	commitCmd.PersistentFlags().StringP("message", "m", "", "Commit message")
+
 	rootCmd.AddCommand(commitCmd)
 }
 
