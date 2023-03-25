@@ -51,9 +51,11 @@ func staged(output string) bool {
 		notStagedSection := outputSplit[1]
 		modifiedRe := regexp.MustCompile(`^\s+modified:\s+`)
 		newFileRe := regexp.MustCompile(`^\s+new file:\s+`)
+		deletedRe := regexp.MustCompile(`^\s+deleted:\s+`)
 
 		modifiedSection := []string{}
 		newFileSection := []string{}
+		deletedSection := []string{}
 
 		for _, line := range strings.Split(notStagedSection, "\n") {
 			if modifiedRe.MatchString(line) {
@@ -64,6 +66,11 @@ func staged(output string) bool {
 			if newFileRe.MatchString(line) {
 				split := newFileRe.Split(line, -1)
 				newFileSection = append(newFileSection, split[1])
+			}
+
+			if deletedRe.MatchString(line) {
+				split := deletedRe.Split(line, -1)
+				deletedSection = append(deletedSection, split[1])
 			}
 		}
 
@@ -105,6 +112,26 @@ func staged(output string) bool {
 			}
 		}
 
+		if len(deletedSection) > 0 {
+			if len(modifiedSection) > 0 || len(newFileSection) > 0 {
+				fmt.Println()
+			}
+
+			c.Println("    Deleted:")
+
+			for _, path := range deletedSection {
+				var newPath string
+				if strings.HasPrefix(path, "../../") {
+					newPath = substituteTilde(path)
+				} else {
+					newPath = path
+				}
+
+				newLine := fmt.Sprintf("\t%s", newPath)
+				color.Green(newLine)
+			}
+		}
+
 		return true
 	}
 
@@ -117,13 +144,20 @@ func notModified(output string) bool {
 	if len(outputSplit) > 1 {
 		notStagedSection := outputSplit[1]
 		modifiedRe := regexp.MustCompile(`^\s+modified:\s+`)
+		deletedRe := regexp.MustCompile(`^\s+deleted:\s+`)
 
 		modifiedSection := []string{}
+		deletedSection := []string{}
 
 		for _, line := range strings.Split(notStagedSection, "\n") {
 			if modifiedRe.MatchString(line) {
 				split := modifiedRe.Split(line, -1)
 				modifiedSection = append(modifiedSection, split[1])
+			}
+
+			if deletedRe.MatchString(line) {
+				split := deletedRe.Split(line, -1)
+				deletedSection = append(deletedSection, split[1])
 			}
 		}
 
@@ -139,6 +173,26 @@ func notModified(output string) bool {
 
 			newLine := fmt.Sprintf("\t%s", newPath)
 			color.Red(newLine)
+		}
+
+		if len(deletedSection) > 0 {
+			if len(modifiedSection) > 0 {
+				fmt.Println()
+			}
+
+			c.Println("    Deleted:")
+
+			for _, path := range deletedSection {
+				var newPath string
+				if strings.HasPrefix(path, "../../") {
+					newPath = substituteTilde(path)
+				} else {
+					newPath = path
+				}
+
+				newLine := fmt.Sprintf("\t%s", newPath)
+				color.Red(newLine)
+			}
 		}
 
 		return true

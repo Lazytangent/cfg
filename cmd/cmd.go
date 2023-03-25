@@ -16,7 +16,7 @@ var rootCmd = &cobra.Command{
 	Run:              run,
 	PersistentPreRun: preRun,
 	TraverseChildren: true,
-	Version:          "0.1.1",
+	Version:          "0.1.2",
 }
 
 func Execute() {
