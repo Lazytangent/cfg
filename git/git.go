@@ -23,6 +23,7 @@ func Run(debug, connectStdin, connectStdout bool, args ...string) (string, error
 	}
 	if connectStdout {
 		cmd.Stdout = os.Stdout
+		cmd.Stderr = os.Stderr
 		cmd.Run()
 		return "", nil
 	} else {
