@@ -14,6 +14,7 @@ import (
 type Config struct {
 	GitDir   string `toml:"git_dir"`
 	WorkTree string `toml:"work_tree"`
+	LocalRepoDir *string `toml:"local_repo_dir"`
 }
 
 func Parse(data string) Config {
@@ -37,7 +38,7 @@ func ParseTildeInPath(path string) string {
 	dir, err := os.UserHomeDir()
 	utils.LogFatalIfErr(err)
 
-	return strings.Replace(path, "~", dir, -1)
+	return strings.ReplaceAll(path, "~", dir)
 }
 
 const defaultConfigFile = `
