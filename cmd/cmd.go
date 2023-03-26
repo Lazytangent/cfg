@@ -6,6 +6,7 @@ import (
 
 	"github.com/spf13/cobra"
 
+	"github.com/lazytangent/cfg/cmd/config"
 	"github.com/lazytangent/cfg/git"
 	"github.com/lazytangent/cfg/utils"
 )
@@ -60,4 +61,6 @@ func preRun(cmd *cobra.Command, args []string) {
 
 func init() {
 	rootCmd.PersistentFlags().BoolP("debug", "d", false, "Set to print extra lines for debugging")
+
+	rootCmd.AddCommand(addCmd, commitCmd, config.Cmd, pushCmd, restoreCmd, statusCmd)
 }

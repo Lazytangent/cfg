@@ -5,10 +5,6 @@ import (
 	"github.com/spf13/cobra"
 )
 
-func init() {
-	rootCmd.AddCommand(statusCmd)
-}
-
 var statusCmd = &cobra.Command{
 	Use:     "status",
 	Aliases: []string{"s", "st"},

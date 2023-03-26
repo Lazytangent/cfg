@@ -5,10 +5,6 @@ import (
 	"github.com/spf13/cobra"
 )
 
-func init() {
-	rootCmd.AddCommand(pushCmd)
-}
-
 var pushCmd = &cobra.Command{
 	Use:     "push",
 	Aliases: []string{"p", "pu"},

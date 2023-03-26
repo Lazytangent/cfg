@@ -9,10 +9,6 @@ import (
 	"github.com/lazytangent/cfg/utils"
 )
 
-func init() {
-	rootCmd.AddCommand(addCmd)
-}
-
 var addCmd = &cobra.Command{
 	Use:     "add",
 	Aliases: []string{"a"},

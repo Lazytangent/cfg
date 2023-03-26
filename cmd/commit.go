@@ -7,8 +7,6 @@ import (
 
 func init() {
 	commitCmd.PersistentFlags().StringP("message", "m", "", "Commit message")
-
-	rootCmd.AddCommand(commitCmd)
 }
 
 var commitCmd = &cobra.Command{

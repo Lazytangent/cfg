@@ -11,7 +11,3 @@ var restoreCmd = &cobra.Command{
 	Short:   "Restores files to previous state",
 	Run:     restore.Run,
 }
-
-func init() {
-	rootCmd.AddCommand(restoreCmd)
-}
