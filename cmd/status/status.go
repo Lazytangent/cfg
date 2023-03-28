@@ -2,6 +2,7 @@ package status
 
 import (
 	"fmt"
+	"log"
 	"os"
 	"regexp"
 	"strings"
@@ -34,12 +35,43 @@ func Run(cmd *cobra.Command, args []string) {
 		return
 	}
 
+	ahead(output)
 	stagedStatus := staged(output)
 	notModifiedStatus := notModified(output)
 
 	if !notModifiedStatus && !stagedStatus {
 		c := color.New(color.FgHiWhite).Add(color.Bold)
 		c.Println("No files changed")
+	}
+}
+
+func ahead(output string) {
+	lines := strings.Split(output, "\n")
+	for _, line := range lines {
+		if strings.HasPrefix(line, "Your branch is ahead of") {
+			var remote string
+			var numOfCommits int
+			c := color.New(color.FgHiWhite).Add(color.Bold)
+
+			_, err := fmt.Sscanf(line, "Your branch is ahead of %s by %d commits.", &remote, &numOfCommits)
+			if err != nil {
+				_, err := fmt.Sscanf(line, "Your branch is ahead of %s by 1 commit.", &remote)
+				if err != nil {
+					fmt.Println(line)
+					log.Println(err)
+					return
+				}
+
+				c.Printf("Ahead of %s by 1 commit.", remote)
+				fmt.Println()
+				fmt.Println()
+				return
+			}
+
+			c.Printf("Ahead of %s by %d commits.", remote, numOfCommits)
+			fmt.Println()
+			fmt.Println()
+		}
 	}
 }
 
