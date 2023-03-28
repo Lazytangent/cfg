@@ -52,11 +52,14 @@ func staged(output string) bool {
 		modifiedRe := regexp.MustCompile(`^\s+modified:\s+`)
 		newFileRe := regexp.MustCompile(`^\s+new file:\s+`)
 		deletedRe := regexp.MustCompile(`^\s+deleted:\s+`)
+		renamedRe := regexp.MustCompile(`^\s+renamed:\s+`)
 
 		modifiedSection := []string{}
 		newFileSection := []string{}
 		deletedSection := []string{}
+		renamedSection := []string{}
 
+		// TODO: Refactor this to remove all the repetitiveness
 		for _, line := range strings.Split(notStagedSection, "\n") {
 			if modifiedRe.MatchString(line) {
 				split := modifiedRe.Split(line, -1)
@@ -72,7 +75,14 @@ func staged(output string) bool {
 				split := deletedRe.Split(line, -1)
 				deletedSection = append(deletedSection, split[1])
 			}
+
+			if renamedRe.MatchString(line) {
+				split := renamedRe.Split(line, -1)
+				renamedSection = append(renamedSection, split[1])
+			}
 		}
+
+		totalLineCount := len(modifiedSection) + len(newFileSection) + len(deletedSection) + len(renamedSection)
 
 		c := color.New(color.FgHiWhite).Add(color.Bold)
 		c.Println("Staged:")
@@ -126,6 +136,34 @@ func staged(output string) bool {
 				} else {
 					newPath = path
 				}
+
+				newLine := fmt.Sprintf("\t%s", newPath)
+				color.Green(newLine)
+			}
+		}
+
+		if renamedSectionLength := len(renamedSection); renamedSectionLength > 0 {
+			// TODO: Update other similar conditionals based on this one
+			if totalLineCount - renamedSectionLength > 0 {
+				fmt.Println()
+			}
+
+			c.Println("    Renamed:")
+			// TODO: Refactor these blocks into a function
+			for _, path := range renamedSection {
+				var newPath string
+				if strings.HasPrefix(path, "../../") {
+					newPath = substituteTilde(path)
+				} else {
+					newPath = path
+				}
+
+				split := strings.Split(newPath, " -> ")
+				secondPath := split[1]
+				if strings.HasPrefix(path, "../../") {
+					secondPath = substituteTilde(secondPath)
+				}
+				newPath = fmt.Sprintf("%s -> %s", split[0], secondPath)
 
 				newLine := fmt.Sprintf("\t%s", newPath)
 				color.Green(newLine)
