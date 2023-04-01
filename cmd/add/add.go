@@ -1,15 +1,14 @@
-package cmd
+package add
 
 import (
 	"fmt"
 
-	"github.com/spf13/cobra"
-
 	"github.com/lazytangent/cfg/git"
 	"github.com/lazytangent/cfg/utils"
+	"github.com/spf13/cobra"
 )
 
-var addCmd = &cobra.Command{
+var Cmd = &cobra.Command{
 	Use:     "add",
 	Aliases: []string{"a"},
 	Short:   "Add files to the staging area",

@@ -14,10 +14,17 @@ import (
 	"github.com/lazytangent/cfg/utils"
 )
 
+var Cmd = &cobra.Command{
+	Use:     "status",
+	Aliases: []string{"s", "st"},
+	Short:   "Print the current git status of the dotfiles repo",
+	Run:     run,
+}
+
 const notStagedMsg = `Changes not staged for commit:`
 const stagedMsg = `Changes to be committed:`
 
-func Run(cmd *cobra.Command, args []string) {
+func run(cmd *cobra.Command, args []string) {
 	debug, err := cmd.Flags().GetBool("debug")
 	utils.LogFatalIfErr(err)
 	if debug {

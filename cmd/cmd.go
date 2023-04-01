@@ -6,8 +6,13 @@ import (
 
 	"github.com/spf13/cobra"
 
+	"github.com/lazytangent/cfg/cmd/add"
+	"github.com/lazytangent/cfg/cmd/commit"
 	"github.com/lazytangent/cfg/cmd/config"
 	"github.com/lazytangent/cfg/cmd/diff"
+	"github.com/lazytangent/cfg/cmd/push"
+	"github.com/lazytangent/cfg/cmd/restore"
+	"github.com/lazytangent/cfg/cmd/status"
 	"github.com/lazytangent/cfg/git"
 	"github.com/lazytangent/cfg/utils"
 )
@@ -63,5 +68,5 @@ func preRun(cmd *cobra.Command, args []string) {
 func init() {
 	rootCmd.PersistentFlags().BoolP("debug", "d", false, "Set to print extra lines for debugging")
 
-	rootCmd.AddCommand(addCmd, diff.Cmd, commitCmd, config.Cmd, pushCmd, restoreCmd, statusCmd)
+	rootCmd.AddCommand(add.Cmd, diff.Cmd, commit.Cmd, config.Cmd, push.Cmd, restore.Cmd, status.Cmd)
 }

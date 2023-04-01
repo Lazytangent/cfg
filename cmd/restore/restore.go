@@ -9,7 +9,14 @@ import (
 	"github.com/lazytangent/cfg/utils"
 )
 
-func Run(cmd *cobra.Command, args []string) {
+var Cmd = &cobra.Command{
+	Use:     "restore",
+	Aliases: []string{"res"},
+	Short:   "Restores files to previous state",
+	Run:     run,
+}
+
+func run(cmd *cobra.Command, args []string) {
 	debug, err := cmd.Flags().GetBool("debug")
 	utils.LogFatalIfErr(err)
 

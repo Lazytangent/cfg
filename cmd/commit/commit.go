@@ -9,7 +9,18 @@ import (
 	"github.com/lazytangent/cfg/utils"
 )
 
-func Run(cmd *cobra.Command, args []string) {
+func init() {
+	Cmd.PersistentFlags().StringP("message", "m", "", "Commit message")
+}
+
+var Cmd = &cobra.Command{
+	Use:     "commit",
+	Aliases: []string{"c"},
+	Short:   "Commit files in the staging area",
+	Run:     run,
+}
+
+func run(cmd *cobra.Command, args []string) {
 	debug, err := cmd.Flags().GetBool("debug")
 	utils.LogFatalIfErr(err)
 
