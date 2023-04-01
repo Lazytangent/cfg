@@ -12,8 +12,8 @@ import (
 )
 
 type Config struct {
-	GitDir   string `toml:"git_dir"`
-	WorkTree string `toml:"work_tree"`
+	GitDir       string  `toml:"git_dir"`
+	WorkTree     string  `toml:"work_tree"`
 	LocalRepoDir *string `toml:"local_repo_dir"`
 }
 

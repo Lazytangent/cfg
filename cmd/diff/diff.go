@@ -8,10 +8,10 @@ import (
 )
 
 var Cmd = &cobra.Command{
-	Use: "diff",
+	Use:     "diff",
 	Aliases: []string{"d"},
-	Short: "Show git diff",
-	Run: run,
+	Short:   "Show git diff",
+	Run:     run,
 }
 
 func run(cmd *cobra.Command, args []string) {

@@ -183,7 +183,7 @@ func staged(output string) bool {
 
 		if renamedSectionLength := len(renamedSection); renamedSectionLength > 0 {
 			// TODO: Update other similar conditionals based on this one
-			if totalLineCount - renamedSectionLength > 0 {
+			if totalLineCount-renamedSectionLength > 0 {
 				fmt.Println()
 			}
 
