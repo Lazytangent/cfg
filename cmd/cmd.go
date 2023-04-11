@@ -68,5 +68,5 @@ func preRun(cmd *cobra.Command, args []string) {
 func init() {
 	rootCmd.PersistentFlags().BoolP("debug", "d", false, "Set to print extra lines for debugging")
 
-	rootCmd.AddCommand(add.Cmd, diff.Cmd, commit.Cmd, config.Cmd, push.Cmd, restore.Cmd, status.Cmd)
+	rootCmd.AddCommand(add.Cmd, diff.Cmd, commit.Cmd, commit.CmCmd, config.Cmd, push.Cmd, restore.Cmd, status.Cmd)
 }
