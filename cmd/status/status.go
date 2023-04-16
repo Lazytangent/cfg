@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"log"
 	"os"
+	"path/filepath"
 	"regexp"
 	"strings"
 
@@ -282,19 +283,13 @@ func substituteTilde(path string) string {
 	cwd, err := os.Getwd()
 	utils.LogFatalIfErr(err)
 
+	newPath := filepath.Join(cwd, path)
+	newPath = filepath.Clean(newPath)
+
 	homeDir, err := os.UserHomeDir()
 	utils.LogFatalIfErr(err)
 
-	cwdTrimmed := strings.Split(cwd, homeDir)
-	cwdSplitDirsCount := strings.Count(cwdTrimmed[1], "/")
-
-	newPath := path
-
-	for i := 0; i < cwdSplitDirsCount; i++ {
-		newPath = strings.TrimPrefix(newPath, "../")
-	}
-
-	newPath = fmt.Sprintf("~/%s", newPath)
+	newPath = strings.ReplaceAll(newPath, homeDir, "~")
 
 	return newPath
 }
