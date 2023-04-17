@@ -22,14 +22,23 @@ var Cmd = &cobra.Command{
 	Run:     run,
 }
 
-const notStagedMsg = `Changes not staged for commit:`
-const stagedMsg = `Changes to be committed:`
+func init() {
+	Cmd.PersistentFlags().BoolP("verbose", "v", false, "Show full output from underlying git command")
+}
 
 func run(cmd *cobra.Command, args []string) {
-	debug, err := cmd.Flags().GetBool("debug")
+	flags := cmd.Flags()
+	debug, err := flags.GetBool("debug")
+	utils.LogFatalIfErr(err)
+	verbose, err := flags.GetBool("verbose")
 	utils.LogFatalIfErr(err)
 	if debug {
 		fmt.Println(utils.CreateDelimiter("Status Command"))
+	}
+
+	if verbose {
+		git.Run(debug, true, true, "status")
+		return
 	}
 
 	output, err := git.Run(debug, false, false, "status")
@@ -82,6 +91,9 @@ func ahead(output string) {
 		}
 	}
 }
+
+const notStagedMsg = `Changes not staged for commit:`
+const stagedMsg = `Changes to be committed:`
 
 func staged(output string) bool {
 	notStagedSplit := strings.Split(output, notStagedMsg)
