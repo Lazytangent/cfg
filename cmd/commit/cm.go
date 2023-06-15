@@ -10,9 +10,9 @@ import (
 )
 
 var CmCmd = &cobra.Command{
-	Use: "cm [message]",
+	Use:   "cm [message]",
 	Short: "commit -m alias",
-	Run: cmRun,
+	Run:   cmRun,
 }
 
 func cmRun(cmd *cobra.Command, args []string) {
