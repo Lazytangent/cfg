@@ -1,5 +1,20 @@
 #+title: =cfg=
 
+* Usage
+** Installation
+*** With =go= CLI directly from GitHub Repository
+#+begin_src shell
+go install github.com/lazytangent/cfg@HEAD
+#+end_src
+
+The =@HEAD= bit is necessary since I don't tag new updates very often.
+*** From a cloned repo
+#+begin_src shell
+  git clone https://github.com/Lazytangent/cfg
+  cd cfg
+  go install .
+#+end_src
+* Notes
 ** Git code snippets
 *** =status=
 **** Updated but not yet committed
