@@ -27,6 +27,10 @@ func run(cmd *cobra.Command, args []string) {
 		runArgs = append(runArgs, "--cached")
 	}
 
+	if len(args) > 0 {
+		runArgs = append(runArgs, args...)
+	}
+
 	git.Run(debug, true, true, runArgs...)
 }
 
