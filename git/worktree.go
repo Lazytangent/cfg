@@ -13,18 +13,22 @@ import (
 // TEST: Does this work the same at the root of a worktree and inside the
 // worktree?
 func Worktree() (*git.Worktree, error) {
+	repo, err := Repository()
+	if err != nil {
+		log.Fatalf("error getting repository: %s", err.Error())
+	}
+
+	return repo.Worktree()
+}
+
+func Repository() (*git.Repository, error) {
 	cfg := config.Parse(config.ReadConfigFile())
 	gitDir := config.ParseTildeInPath(cfg.GitDir)
 	workTree := config.ParseTildeInPath(cfg.WorkTree)
 
 	dotGitFs := osfs.New(gitDir)
 	dotGitStorer := filesystem.NewStorage(dotGitFs, cache.NewObjectLRUDefault())
-	tree := osfs.New(workTree)
+	treeFs := osfs.New(workTree)
 
-	repo, err := git.Open(dotGitStorer, tree)
-	if err != nil {
-		log.Fatalf("git.PlainOpen: %s", err.Error())
-	}
-
-	return repo.Worktree()
+	return git.Open(dotGitStorer, treeFs)
 }
