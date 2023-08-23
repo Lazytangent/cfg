@@ -2,6 +2,7 @@ package add
 
 import (
 	"fmt"
+	"log"
 
 	"github.com/lazytangent/cfg/git"
 	"github.com/lazytangent/cfg/utils"
@@ -23,11 +24,22 @@ func add(cmd *cobra.Command, args []string) {
 		fmt.Println("Add command")
 	}
 
-	runArgs := []string{"add", "-f"}
+	// runArgs := []string{"add", "-f"}
 
-	if len(args) > 0 {
-		runArgs = append(runArgs, args...)
+	// if len(args) > 0 {
+	// 	runArgs = append(runArgs, args...)
+	// }
+
+	// git.Run(debug, true, true, runArgs...)
+
+	worktree, err := git.Worktree()
+	if err != nil {
+		log.Fatalf("git.Worktree: %s", err.Error())
 	}
 
-	git.Run(debug, true, true, runArgs...)
+	if len(args) > 0 {
+		for _, pattern := range args {
+			worktree.AddGlob(pattern)
+		}
+	}
 }
