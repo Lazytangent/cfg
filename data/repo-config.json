@@ -1,0 +1,427 @@
+{
+  "Core": {
+    "IsBare": true,
+    "Worktree": "",
+    "CommentChar": "",
+    "RepositoryFormatVersion": ""
+  },
+  "User": {
+    "Name": "",
+    "Email": ""
+  },
+  "Author": {
+    "Name": "",
+    "Email": ""
+  },
+  "Committer": {
+    "Name": "",
+    "Email": ""
+  },
+  "Pack": {
+    "Window": 10
+  },
+  "Init": {
+    "DefaultBranch": ""
+  },
+  "Extensions": {
+    "ObjectFormat": ""
+  },
+  "Remotes": {
+    "origin": {
+      "Name": "origin",
+      "URLs": [
+        "git@github.com:Lazytangent/arch-dots.git"
+      ],
+      "Mirror": false,
+      "Fetch": [
+        "+refs/heads/*:refs/remotes/origin/*"
+      ]
+    }
+  },
+  "Submodules": {
+    ".config/emacs-confs/empty": {
+      "Name": ".config/emacs-confs/empty",
+      "Path": "",
+      "URL": "git@github.com:Lazytangent/empty-emacs.git",
+      "Branch": ""
+    },
+    ".config/emacs-confs/my-macs": {
+      "Name": ".config/emacs-confs/my-macs",
+      "Path": "",
+      "URL": "git@github.com:Lazytangent/my-macs.git",
+      "Branch": ""
+    },
+    ".config/emacs-confs/spacemacs": {
+      "Name": ".config/emacs-confs/spacemacs",
+      "Path": "",
+      "URL": "git@github.com:Lazytangent/spacemacs-config.git",
+      "Branch": ""
+    },
+    ".config/lazynvim": {
+      "Name": ".config/lazynvim",
+      "Path": "",
+      "URL": "git@github.com:Lazytangent/nvim-conf.git",
+      "Branch": ""
+    },
+    ".config/lazytangent-emacs": {
+      "Name": ".config/lazytangent-emacs",
+      "Path": "",
+      "URL": "git@github.com:Lazytangent/lazytangent-emacs.git",
+      "Branch": ""
+    },
+    ".config/nano-emacs": {
+      "Name": ".config/nano-emacs",
+      "Path": "",
+      "URL": "git@github.com:Lazytangent/nano-emacs.git",
+      "Branch": ""
+    },
+    ".config/nvim": {
+      "Name": ".config/nvim",
+      "Path": "",
+      "URL": "git@github.com:Lazytangent/nvim-conf.git",
+      "Branch": ""
+    },
+    ".config/plainvim": {
+      "Name": ".config/plainvim",
+      "Path": "",
+      "URL": "git@github.com:Lazytangent/plainvim.git",
+      "Branch": ""
+    },
+    ".config/prelude-emacs": {
+      "Name": ".config/prelude-emacs",
+      "Path": "",
+      "URL": "https://github.com/bbatsov/prelude.git",
+      "Branch": ""
+    },
+    ".config/purcell-emacs": {
+      "Name": ".config/purcell-emacs",
+      "Path": "",
+      "URL": "https://github.com/purcell/emacs.d.git",
+      "Branch": ""
+    },
+    ".config/vanillamacs": {
+      "Name": ".config/vanillamacs",
+      "Path": "",
+      "URL": "git@github.com:Lazytangent/vanillamacs.git",
+      "Branch": ""
+    },
+    ".config/wezterm": {
+      "Name": ".config/wezterm",
+      "Path": "",
+      "URL": "git@github.com:Lazytangent/wezterm-config.git",
+      "Branch": ""
+    },
+    ".vim": {
+      "Name": ".vim",
+      "Path": "",
+      "URL": "git@github.com:Lazytangent/dotvim.git",
+      "Branch": ""
+    },
+    ".zsh_plugins": {
+      "Name": ".zsh_plugins",
+      "Path": "",
+      "URL": "git@github.com:Lazytangent/zsh-custom-plugins.git",
+      "Branch": ""
+    }
+  },
+  "Branches": {
+    "main": {
+      "Name": "main",
+      "Remote": "origin",
+      "Merge": "refs/heads/main",
+      "Rebase": "",
+      "Description": ""
+    }
+  },
+  "URLs": {},
+  "Raw": {
+    "Comment": null,
+    "Sections": [
+      {
+        "Name": "core",
+        "Options": [
+          {
+            "Key": "repositoryformatversion",
+            "Value": "0"
+          },
+          {
+            "Key": "filemode",
+            "Value": "true"
+          },
+          {
+            "Key": "bare",
+            "Value": "true"
+          }
+        ],
+        "Subsections": null
+      },
+      {
+        "Name": "remote",
+        "Options": null,
+        "Subsections": [
+          {
+            "Name": "origin",
+            "Options": [
+              {
+                "Key": "url",
+                "Value": "git@github.com:Lazytangent/arch-dots.git"
+              },
+              {
+                "Key": "fetch",
+                "Value": "+refs/heads/*:refs/remotes/origin/*"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "Name": "status",
+        "Options": [
+          {
+            "Key": "showUntrackedFiles",
+            "Value": "no"
+          }
+        ],
+        "Subsections": null
+      },
+      {
+        "Name": "branch",
+        "Options": null,
+        "Subsections": [
+          {
+            "Name": "main",
+            "Options": [
+              {
+                "Key": "remote",
+                "Value": "origin"
+              },
+              {
+                "Key": "merge",
+                "Value": "refs/heads/main"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "Name": "submodule",
+        "Options": null,
+        "Subsections": [
+          {
+            "Name": ".config/nvim",
+            "Options": [
+              {
+                "Key": "active",
+                "Value": "true"
+              },
+              {
+                "Key": "url",
+                "Value": "git@github.com:Lazytangent/nvim-conf.git"
+              }
+            ]
+          },
+          {
+            "Name": ".config/vanillamacs",
+            "Options": [
+              {
+                "Key": "active",
+                "Value": "true"
+              },
+              {
+                "Key": "url",
+                "Value": "git@github.com:Lazytangent/vanillamacs.git"
+              }
+            ]
+          },
+          {
+            "Name": ".config/wezterm",
+            "Options": [
+              {
+                "Key": "active",
+                "Value": "true"
+              },
+              {
+                "Key": "url",
+                "Value": "git@github.com:Lazytangent/wezterm-config.git"
+              }
+            ]
+          },
+          {
+            "Name": ".vim",
+            "Options": [
+              {
+                "Key": "active",
+                "Value": "true"
+              },
+              {
+                "Key": "url",
+                "Value": "git@github.com:Lazytangent/dotvim.git"
+              }
+            ]
+          },
+          {
+            "Name": ".config/lazynvim",
+            "Options": [
+              {
+                "Key": "url",
+                "Value": "git@github.com:Lazytangent/nvim-conf.git"
+              },
+              {
+                "Key": "active",
+                "Value": "true"
+              }
+            ]
+          },
+          {
+            "Name": ".config/plainvim",
+            "Options": [
+              {
+                "Key": "url",
+                "Value": "git@github.com:Lazytangent/plainvim.git"
+              },
+              {
+                "Key": "active",
+                "Value": "true"
+              }
+            ]
+          },
+          {
+            "Name": ".config/purcell-emacs",
+            "Options": [
+              {
+                "Key": "url",
+                "Value": "https://github.com/purcell/emacs.d.git"
+              },
+              {
+                "Key": "active",
+                "Value": "true"
+              }
+            ]
+          },
+          {
+            "Name": ".config/prelude-emacs",
+            "Options": [
+              {
+                "Key": "url",
+                "Value": "https://github.com/bbatsov/prelude.git"
+              },
+              {
+                "Key": "active",
+                "Value": "true"
+              }
+            ]
+          },
+          {
+            "Name": ".config/nano-emacs",
+            "Options": [
+              {
+                "Key": "url",
+                "Value": "git@github.com:Lazytangent/nano-emacs.git"
+              },
+              {
+                "Key": "active",
+                "Value": "true"
+              }
+            ]
+          },
+          {
+            "Name": ".config/lazytangent-emacs",
+            "Options": [
+              {
+                "Key": "url",
+                "Value": "git@github.com:Lazytangent/lazytangent-emacs.git"
+              },
+              {
+                "Key": "active",
+                "Value": "true"
+              }
+            ]
+          },
+          {
+            "Name": ".config/emacs-confs/empty",
+            "Options": [
+              {
+                "Key": "url",
+                "Value": "git@github.com:Lazytangent/empty-emacs.git"
+              },
+              {
+                "Key": "active",
+                "Value": "true"
+              }
+            ]
+          },
+          {
+            "Name": ".zsh_plugins",
+            "Options": [
+              {
+                "Key": "url",
+                "Value": "git@github.com:Lazytangent/zsh-custom-plugins.git"
+              },
+              {
+                "Key": "active",
+                "Value": "true"
+              }
+            ]
+          },
+          {
+            "Name": ".config/emacs-confs/my-macs",
+            "Options": [
+              {
+                "Key": "url",
+                "Value": "git@github.com:Lazytangent/my-macs.git"
+              },
+              {
+                "Key": "active",
+                "Value": "true"
+              }
+            ]
+          },
+          {
+            "Name": ".config/emacs-confs/spacemacs",
+            "Options": [
+              {
+                "Key": "url",
+                "Value": "git@github.com:Lazytangent/spacemacs-config.git"
+              },
+              {
+                "Key": "active",
+                "Value": "true"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "Name": "user",
+        "Options": null,
+        "Subsections": null
+      },
+      {
+        "Name": "author",
+        "Options": null,
+        "Subsections": null
+      },
+      {
+        "Name": "committer",
+        "Options": null,
+        "Subsections": null
+      },
+      {
+        "Name": "init",
+        "Options": null,
+        "Subsections": null
+      },
+      {
+        "Name": "pack",
+        "Options": null,
+        "Subsections": null
+      },
+      {
+        "Name": "url",
+        "Options": null,
+        "Subsections": null
+      }
+    ],
+    "Includes": null
+  }
+}

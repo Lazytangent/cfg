@@ -1,6 +1,8 @@
 package test
 
 import (
+	"encoding/json"
+	"fmt"
 	"log"
 
 	"github.com/lazytangent/cfg/git"
@@ -13,21 +15,19 @@ var Cmd = &cobra.Command{
 }
 
 func run(cmd *cobra.Command, args []string) {
-	worktree, err := git.Worktree()
+	repository, err := git.Repository()
 	if err != nil {
-		log.Fatalf("git.Worktree: %s", err.Error())
+		log.Fatalf("git.Repository: %s", err.Error())
 	}
 
-	subs, err := worktree.Submodules()
+	cfg, err := repository.Config()
 	if err != nil {
-		log.Fatalf("worktree.Submodules: %s", err.Error())
+		log.Fatalf("repository.Config: %s", err.Error())
 	}
 
-	for _, submodule := range subs {
-		status, err := submodule.Status()
-		if err != nil {
-			log.Fatalf("submodule.Status %s", err.Error())
-		}
-		log.Println(status.String())
+	jsonified, err := json.MarshalIndent(cfg, "", "  ")
+	if err != nil {
+		log.Fatalf("json.MarshalIndent: %s", err.Error())
 	}
+	fmt.Println(string(jsonified))
 }
