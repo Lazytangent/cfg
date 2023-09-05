@@ -11,15 +11,15 @@ help:
 .PHONY: build
 build:
 	@mkdir -p target
-	@go build -o target
+	@go build -o target -tags static
 
 .PHONY: install
 install:
-	@go install .
+	@go -tags static install .
 
 .PHONY: check
 check:
-	@go test ./...
+	@go -tags static test ./...
 
 .PHONY: tags
 tags:
