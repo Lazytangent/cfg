@@ -23,7 +23,7 @@ func add(cmd *cobra.Command, args []string) {
 		fmt.Println("Add command")
 	}
 
-	runArgs := []string{"add", "-f"}
+	runArgs := []string{"add"}
 
 	if len(args) > 0 {
 		runArgs = append(runArgs, args...)
