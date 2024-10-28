@@ -27,6 +27,10 @@ func add(cmd *cobra.Command, args []string) {
 
 	if len(args) > 0 {
 		runArgs = append(runArgs, args...)
+	} else {
+		list := getFilesList(debug)
+		fmt.Printf("%#v\n", list)
+		return
 	}
 
 	git.Run(debug, true, true, runArgs...)
