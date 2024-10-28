@@ -2,7 +2,9 @@ package add
 
 import (
 	"fmt"
+	"log"
 
+	tea "github.com/charmbracelet/bubbletea"
 	"github.com/lazytangent/cfg/git"
 	"github.com/lazytangent/cfg/utils"
 	"github.com/spf13/cobra"
@@ -28,9 +30,21 @@ func add(cmd *cobra.Command, args []string) {
 	if len(args) > 0 {
 		runArgs = append(runArgs, args...)
 	} else {
-		list := getFilesList(debug)
-		fmt.Printf("%#v\n", list)
-		return
+		p, err := tea.NewProgram(newModel(debug)).Run()
+		utils.LogFatalIfErr(err)
+
+		m, ok := p.(model)
+		if !ok {
+			log.Fatalln("[add] could not cast tea.Model to add.model")
+		}
+		data := m.form.Get("items")
+
+		items, ok := data.([]string)
+		if !ok {
+			log.Fatalln("[add] could not cast any to []string")
+		}
+
+		runArgs = append(runArgs, items...)
 	}
 
 	git.Run(debug, true, true, runArgs...)
