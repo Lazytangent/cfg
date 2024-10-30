@@ -44,16 +44,13 @@ func getFilesList(debug bool) []string {
 	return list
 }
 
-func newModel(debug bool) model {
+func newModel(opts []string, debug bool) model {
 	return model{
 		form: huh.NewForm(
 			huh.NewGroup(
 				huh.NewMultiSelect[string]().
 					Key("items").
-					OptionsFunc(func() []huh.Option[string] {
-						opts := getFilesList(debug)
-						return huh.NewOptions(opts...)
-					}, nil),
+					Options(huh.NewOptions(opts...)...),
 			),
 		),
 	}

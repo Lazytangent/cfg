@@ -9,12 +9,12 @@ help:
 	@echo "  fmt:		Run 'go fmt' and 'goimports'"
 
 .PHONY: build
-build:
+build: clean
 	@mkdir -p target
 	@go build -o target
 
 .PHONY: install
-install:
+install: build
 	@go install .
 
 .PHONY: check
@@ -29,3 +29,7 @@ tags:
 fmt:
 	@go fmt ./...
 	@goimports -w .
+
+.PHONY: clean
+clean:
+	@rm -rf target
