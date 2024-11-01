@@ -44,7 +44,7 @@ func add(cmd *cobra.Command, args []string) {
 				fmt.Println("len(filesList) == 1", filesList)
 			}
 
-			fmt.Println("Only one file in filesList, adding it to the staging area...")
+			fmt.Printf("Only one file in filesList, adding it (%s) to the staging area...\n", filesList[0])
 			runArgs = append(runArgs, filesList[0])
 		} else {
 			if debug {
