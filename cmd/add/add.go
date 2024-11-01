@@ -30,7 +30,7 @@ func add(cmd *cobra.Command, args []string) {
 	if len(args) > 0 {
 		runArgs = append(runArgs, args...)
 	} else {
-		filesList := getFilesList(debug)
+		filesList := getFilesList(cmd, debug)
 
 		if len(filesList) == 0 {
 			if debug {
@@ -58,7 +58,7 @@ func add(cmd *cobra.Command, args []string) {
 		}
 	}
 
-	git.Run(debug, true, true, runArgs...)
+	git.Run(debug, true, true, cmd, runArgs...)
 }
 
 func getItemsFromTeaProgram(filesList []string, debug bool) ([]string, error) {

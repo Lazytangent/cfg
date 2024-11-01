@@ -7,10 +7,11 @@ import (
 
 	"github.com/lazytangent/cfg/config"
 	"github.com/lazytangent/cfg/utils"
+	"github.com/spf13/cobra"
 )
 
-func Run(debug, connectStdin, connectStdout bool, args ...string) (string, error) {
-	args = addDefaultArgs(args)
+func Run(debug, connectStdin, connectStdout bool, cobraCmd *cobra.Command, args ...string) (string, error) {
+	args = addDefaultArgs(cobraCmd, args)
 
 	if debug {
 		fmt.Println("Total args passed to git:")
@@ -34,8 +35,10 @@ func Run(debug, connectStdin, connectStdout bool, args ...string) (string, error
 	}
 }
 
-func addDefaultArgs(args []string) []string {
-	cfg := config.Parse(config.ReadConfigFile())
+func addDefaultArgs(cmd *cobra.Command, args []string) []string {
+	cfg, err := config.GetConfig(cmd)
+	utils.LogFatalIfErr(err)
+
 	gitDir := config.ParseTildeInPath(cfg.GitDir)
 	workTree := config.ParseTildeInPath(cfg.WorkTree)
 

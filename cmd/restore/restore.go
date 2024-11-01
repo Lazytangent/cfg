@@ -30,7 +30,7 @@ func run(cmd *cobra.Command, args []string) {
 		runArgs = append(runArgs, args...)
 	}
 
-	output, err := git.Run(debug, false, false, runArgs...)
+	output, err := git.Run(debug, false, false, cmd, runArgs...)
 	if err != nil {
 		fmt.Println(err)
 	}

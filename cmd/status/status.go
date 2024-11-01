@@ -37,11 +37,11 @@ func run(cmd *cobra.Command, args []string) {
 	}
 
 	if verbose {
-		git.Run(debug, true, true, "status")
+		git.Run(debug, true, true, cmd, "status")
 		return
 	}
 
-	output, err := git.Run(debug, false, false, "status")
+	output, err := git.Run(debug, false, false, cmd, "status")
 	if debug {
 		fmt.Println("Normal output:")
 		fmt.Print(output)

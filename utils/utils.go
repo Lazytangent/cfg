@@ -1,11 +1,13 @@
 package utils
 
 import (
+	"errors"
 	"fmt"
 	"log"
 	"strings"
 
 	"github.com/spf13/cobra"
+	"github.com/spf13/viper"
 )
 
 const defaultLen = 80
@@ -51,4 +53,17 @@ func GetGitArgs(cmd *cobra.Command, args []string) []string {
 	}
 
 	return args[idx:]
+}
+
+func GetViper(cmd *cobra.Command) (*viper.Viper, error) {
+	ctx := cmd.Context()
+
+	vpr := ctx.Value("viper")
+
+	v, ok := vpr.(*viper.Viper)
+	if !ok {
+		return nil, errors.New("could not cast 'viper' from context to *viper.Viper")
+	}
+
+	return v, nil
 }

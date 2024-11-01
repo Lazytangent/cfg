@@ -2,38 +2,26 @@ package config
 
 import (
 	"encoding/json"
-	"errors"
 	"os"
 	"strings"
 
-	"github.com/BurntSushi/toml"
+	"github.com/spf13/cobra"
 
-	"github.com/lazytangent/cfg/constants"
 	"github.com/lazytangent/cfg/utils"
 )
 
 type Config struct {
-	GitDir       string  `toml:"git_dir"`
-	WorkTree     string  `toml:"work_tree"`
-	LocalRepoDir *string `toml:"local_repo_dir"`
+	GitDir       string  `toml:"git_dir" mapstructure:"git_dir"`
+	WorkTree     string  `toml:"work_tree" mapstructure:"work_tree"`
+	LocalRepoDir *string `toml:"local_repo_dir" mapstructure:"local_work_dir"`
 }
 
-func Parse(data string) Config {
-	var conf Config
-	_, err := toml.Decode(data, &conf)
-	utils.LogFatalIfErr(err)
-
-	return conf
-}
-
-func (c Config) Print() string {
+func (c Config) String() string {
 	data, err := json.MarshalIndent(c, "", "  ")
 	utils.LogFatalIfErr(err)
 
 	return string(data)
 }
-
-const configFile = "~/.config/cfg/config.toml"
 
 func ParseTildeInPath(path string) string {
 	dir, err := os.UserHomeDir()
@@ -42,13 +30,17 @@ func ParseTildeInPath(path string) string {
 	return strings.ReplaceAll(path, "~", dir)
 }
 
-func ReadConfigFile() string {
-	configPath := ParseTildeInPath(configFile)
-	dat, err := os.ReadFile(configPath)
-	if errors.Is(err, os.ErrNotExist) {
-		return constants.DefaultConfig
+func GetConfig(cmd *cobra.Command) (*Config, error) {
+	vpr, err := utils.GetViper(cmd)
+	if err != nil {
+		return nil, err
 	}
 
-	utils.LogFatalIfErr(err)
-	return string(dat)
+	var cfg Config
+	err = vpr.Unmarshal(&cfg)
+	if err != nil {
+		return nil, err
+	}
+
+	return &cfg, nil
 }

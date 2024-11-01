@@ -57,7 +57,7 @@ func run(cmd *cobra.Command, args []string) {
 	}
 
 	gitArgs := utils.GetGitArgs(cmd, args)
-	git.Run(debug, true, true, gitArgs...)
+	git.Run(debug, true, true, cmd, gitArgs...)
 }
 
 func preRun(cmd *cobra.Command, args []string) {

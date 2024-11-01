@@ -31,5 +31,5 @@ func cmRun(cmd *cobra.Command, args []string) {
 
 	commitArgs := []string{"commit", "-m", msg}
 
-	git.Run(debug, true, true, commitArgs...)
+	git.Run(debug, true, true, cmd, commitArgs...)
 }

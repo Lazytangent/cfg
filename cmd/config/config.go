@@ -35,9 +35,9 @@ func Run(cmd *cobra.Command, args []string) {
 	}
 
 	if list {
-		data := config_.ReadConfigFile()
-		cfg := config_.Parse(data)
-		fmt.Printf("%v\n", cfg.Print())
+		cfg, err := config_.GetConfig(cmd)
+		utils.LogFatalIfErr(err)
+		fmt.Println(cfg)
 		return
 	}
 

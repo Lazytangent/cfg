@@ -8,6 +8,7 @@ import (
 
 	tea "github.com/charmbracelet/bubbletea"
 	"github.com/charmbracelet/huh"
+	"github.com/spf13/cobra"
 
 	"github.com/lazytangent/cfg/git"
 	"github.com/lazytangent/cfg/utils"
@@ -18,10 +19,10 @@ type model struct {
 }
 
 // Get list of changed files from `git status --porcelain=1`
-func getFilesList(debug bool) []string {
+func getFilesList(cmd *cobra.Command, debug bool) []string {
 	var list []string
 
-	output, err := git.Run(debug, false, false, "status", "--porcelain=1")
+	output, err := git.Run(debug, false, false, cmd, "status", "--porcelain=1")
 	utils.LogFatalIfErr(err)
 
 	homeDir, err := os.UserHomeDir()
