@@ -1,10 +1,14 @@
 package cmd
 
 import (
+	"context"
 	"fmt"
+	"log"
 	"os"
+	"path/filepath"
 
 	"github.com/spf13/cobra"
+	"github.com/spf13/viper"
 
 	"github.com/lazytangent/cfg/cmd/add"
 	"github.com/lazytangent/cfg/cmd/commit"
@@ -13,6 +17,7 @@ import (
 	"github.com/lazytangent/cfg/cmd/push"
 	"github.com/lazytangent/cfg/cmd/restore"
 	"github.com/lazytangent/cfg/cmd/status"
+	"github.com/lazytangent/cfg/constants"
 	"github.com/lazytangent/cfg/git"
 	"github.com/lazytangent/cfg/utils"
 )
@@ -26,8 +31,14 @@ var rootCmd = &cobra.Command{
 	Version:          "0.1.5",
 }
 
+var cfgFile string
+var v *viper.Viper
+
 func Execute() {
-	if err := rootCmd.Execute(); err != nil {
+	ctx := context.TODO()
+	ctx = context.WithValue(ctx, "viper", v)
+
+	if err := rootCmd.ExecuteContext(ctx); err != nil {
 		fmt.Fprintln(os.Stderr, err)
 		os.Exit(1)
 	}
@@ -66,7 +77,46 @@ func preRun(cmd *cobra.Command, args []string) {
 }
 
 func init() {
+	v = viper.New()
+
+	cobra.OnInitialize(initConfig(v))
+
 	rootCmd.PersistentFlags().BoolP("debug", "d", false, "Set to print extra lines for debugging")
+	rootCmd.PersistentFlags().StringVarP(&cfgFile, "config", "c", "", "config file (default is $HOME/.config/cfg/config.toml)")
 
 	rootCmd.AddCommand(add.Cmd, diff.Cmd, commit.Cmd, commit.CmCmd, config.Cmd, push.Cmd, restore.Cmd, status.Cmd)
+}
+
+func initConfig(v *viper.Viper) func() {
+	return func() {
+		var configPath string
+
+		if cfgFile != "" {
+			v.SetConfigFile(cfgFile)
+		} else {
+			home, err := os.UserHomeDir()
+			utils.LogFatalIfErr(err)
+
+			configPath = filepath.Join(home, ".config", "cfg")
+
+			v.AddConfigPath(configPath)
+			v.SetConfigName("config")
+			v.SetConfigType("toml")
+		}
+
+		if err := v.ReadInConfig(); err != nil {
+			if _, ok := err.(viper.ConfigFileNotFoundError); ok {
+				log.Println("Config file not found. Creating...")
+
+				err := os.MkdirAll(configPath, 0755)
+				utils.LogFatalIfErr(err)
+
+				err = os.WriteFile(filepath.Join(configPath, "config.toml"), []byte(constants.DefaultConfig), 0644)
+				utils.LogFatalIfErr(err)
+				return
+			}
+
+			log.Fatal(err)
+		}
+	}
 }

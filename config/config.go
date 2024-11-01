@@ -8,6 +8,7 @@ import (
 
 	"github.com/BurntSushi/toml"
 
+	"github.com/lazytangent/cfg/constants"
 	"github.com/lazytangent/cfg/utils"
 )
 
@@ -41,16 +42,11 @@ func ParseTildeInPath(path string) string {
 	return strings.ReplaceAll(path, "~", dir)
 }
 
-const defaultConfigFile = `
-git_dir = "~/.cfg/"
-work_tree = "~/"
-`
-
 func ReadConfigFile() string {
 	configPath := ParseTildeInPath(configFile)
 	dat, err := os.ReadFile(configPath)
 	if errors.Is(err, os.ErrNotExist) {
-		return defaultConfigFile
+		return constants.DefaultConfig
 	}
 
 	utils.LogFatalIfErr(err)
