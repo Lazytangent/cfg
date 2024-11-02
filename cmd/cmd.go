@@ -12,6 +12,7 @@ import (
 
 	"github.com/lazytangent/cfg/cmd/add"
 	"github.com/lazytangent/cfg/cmd/commit"
+	"github.com/lazytangent/cfg/cmd/commit/format"
 	"github.com/lazytangent/cfg/cmd/config"
 	"github.com/lazytangent/cfg/cmd/diff"
 	"github.com/lazytangent/cfg/cmd/push"
@@ -84,7 +85,7 @@ func init() {
 	rootCmd.PersistentFlags().BoolP("debug", "d", false, "Set to print extra lines for debugging")
 	rootCmd.PersistentFlags().StringVarP(&cfgFile, "config", "c", "", "config file (default is $HOME/.config/cfg/config.toml)")
 
-	rootCmd.AddCommand(add.Cmd, diff.Cmd, commit.Cmd, commit.CmCmd, config.Cmd, push.Cmd, restore.Cmd, status.Cmd)
+	rootCmd.AddCommand(add.Cmd, diff.Cmd, commit.Cmd, commit.CmCmd, format.Cmd, config.Cmd, push.Cmd, restore.Cmd, status.Cmd)
 }
 
 func initConfig(v *viper.Viper) func() {
